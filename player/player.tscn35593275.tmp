@@ -1,0 +1,50 @@
+[gd_scene load_steps=4 format=3 uid="uid://csvnxwbpljvax"]
+
+[ext_resource type="Script" uid="uid://dsdvk3xtxco0v" path="res://player/player.gd" id="2_g1dw6"]
+[ext_resource type="Script" uid="uid://cwodxnd3qw0gb" path="res://player/ui.gd" id="4_yw30f"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sh265"]
+radius = 0.4
+
+[node name="PlayerNode" type="CharacterBody3D"]
+physics_interpolation_mode = 1
+script = ExtResource("2_g1dw6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_sh265")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -0.1)
+current = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource("4_yw30f")
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -2.5
+offset_top = -2.5
+offset_right = 2.5
+offset_bottom = 2.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 72.0
+grow_horizontal = 0
+
+[node name="FPSCounter" type="Label" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+
+[node name="pFPSCounter" type="Label" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24

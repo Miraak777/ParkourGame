@@ -1,0 +1,103 @@
+[gd_scene load_steps=14 format=3 uid="uid://7105ohynf88f"]
+
+[ext_resource type="Script" uid="uid://4qjg4n6i0w6l" path="res://level.gd" id="1_1ainy"]
+[ext_resource type="PackedScene" uid="uid://csvnxwbpljvax" path="res://player/player.tscn" id="1_u52ul"]
+[ext_resource type="Material" uid="uid://3ae4h1ikn5bn" path="res://materials/BlackGrid1024.tres" id="1_vonw3"]
+[ext_resource type="Material" uid="uid://bfjvumw4ku3hf" path="res://materials/OrangeGrid1024.tres" id="2_oi3di"]
+[ext_resource type="PackedScene" uid="uid://da6ckj50245pp" path="res://objects/static_block.tscn" id="4_0b4ue"]
+[ext_resource type="PackedScene" uid="uid://c58jbypu1yv4g" path="res://objects/target.tscn" id="5_f2txt"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5xgho"]
+sky_top_color = Color(0.43276227, 0.5718515, 1, 1)
+sky_horizon_color = Color(0.7738333, 0.7796688, 0.7913334, 1)
+
+[sub_resource type="Sky" id="Sky_u52ul"]
+sky_material = SubResource("ProceduralSkyMaterial_5xgho")
+
+[sub_resource type="Environment" id="Environment_vonw3"]
+background_mode = 2
+sky = SubResource("Sky_u52ul")
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_oi3di"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_u52ul"]
+material = ExtResource("1_vonw3")
+size = Vector2(50, 50)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_u52ul"]
+size = Vector3(50, 10, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_u52ul"]
+material = ExtResource("2_oi3di")
+size = Vector3(50, 10, 1)
+
+[node name="Level" type="Node3D"]
+script = ExtResource("1_1ainy")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_vonw3")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.6238932, -0.59931934, 0.50157106, 0, 0.6417977, 0.76687396, -0.7815096, -0.47844744, 0.40041324, 24.299423, 53.28514, 24.467466)
+sky_mode = 1
+
+[node name="LevelBorders" type="StaticBody3D" parent="."]
+
+[node name="Floor" type="CollisionShape3D" parent="LevelBorders"]
+shape = SubResource("WorldBoundaryShape3D_oi3di")
+
+[node name="FloorMesh" type="MeshInstance3D" parent="LevelBorders/Floor"]
+mesh = SubResource("PlaneMesh_u52ul")
+skeleton = NodePath("../..")
+
+[node name="Wall1" type="CollisionShape3D" parent="LevelBorders"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 25.5)
+shape = SubResource("BoxShape3D_u52ul")
+
+[node name="WallMesh" type="MeshInstance3D" parent="LevelBorders/Wall1"]
+mesh = SubResource("BoxMesh_u52ul")
+skeleton = NodePath("../..")
+
+[node name="Wall2" type="CollisionShape3D" parent="LevelBorders"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, -25.5)
+shape = SubResource("BoxShape3D_u52ul")
+
+[node name="WallMesh" type="MeshInstance3D" parent="LevelBorders/Wall2"]
+mesh = SubResource("BoxMesh_u52ul")
+skeleton = NodePath("../..")
+
+[node name="Wall3" type="CollisionShape3D" parent="LevelBorders"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -25.5, 5, 0)
+shape = SubResource("BoxShape3D_u52ul")
+
+[node name="WallMesh" type="MeshInstance3D" parent="LevelBorders/Wall3"]
+mesh = SubResource("BoxMesh_u52ul")
+skeleton = NodePath("../..")
+
+[node name="Wall4" type="CollisionShape3D" parent="LevelBorders"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 25.5, 5, 0)
+shape = SubResource("BoxShape3D_u52ul")
+
+[node name="WallMesh" type="MeshInstance3D" parent="LevelBorders/Wall4"]
+mesh = SubResource("BoxMesh_u52ul")
+skeleton = NodePath("../..")
+
+[node name="StaticBlock" parent="." groups=["Targets"] instance=ExtResource("4_0b4ue")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7952647, 0.5, 6.3437967)
+
+[node name="StaticBlock2" parent="." groups=["Targets"] instance=ExtResource("4_0b4ue")]
+transform = Transform3D(10, 0, 0, 0, 2, 0, 0, 0, 1, 8.311355, 2.37154, 8.233515)
+
+[node name="StaticBlock3" parent="." groups=["Targets"] instance=ExtResource("4_0b4ue")]
+transform = Transform3D(10, 0, 0, 0, 2, 0, 0, 0, 1, 8.311355, 2.37154, 4.5631638)
+
+[node name="Target" parent="." instance=ExtResource("5_f2txt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.289389, 2.8790526, -8.965132)
+
+[node name="Target2" parent="." instance=ExtResource("5_f2txt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0776181, 1.943068, -8.965132)
+
+[node name="Target3" parent="." instance=ExtResource("5_f2txt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.156593, 4.2309575, -8.965132)
+
+[node name="PlayerNode" parent="." instance=ExtResource("1_u52ul")]

@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://da6ckj50245pp"]
+
+[ext_resource type="Material" uid="uid://cevkfo0aoj0r2" path="res://materials/OrangeGrid512.tres" id="1_5tpor"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5yfdi"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_5tpor"]
+material = ExtResource("1_5tpor")
+
+[node name="StaticBlock" type="StaticBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_5yfdi")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_5tpor")

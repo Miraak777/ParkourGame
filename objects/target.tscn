@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://c58jbypu1yv4g"]
+
+[ext_resource type="Script" uid="uid://sgybnnsxa8ar" path="res://objects/target.gd" id="1_fmpuq"]
+[ext_resource type="Material" uid="uid://c2b3d1o1feni7" path="res://materials/RedLogo.tres" id="1_to6tg"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_pueum"]
+material = ExtResource("1_to6tg")
+height = 0.2
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_to6tg"]
+height = 0.2
+
+[node name="Target" type="StaticBody3D"]
+script = ExtResource("1_fmpuq")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+mesh = SubResource("CylinderMesh_pueum")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+visible = false
+shape = SubResource("CylinderShape3D_to6tg")
